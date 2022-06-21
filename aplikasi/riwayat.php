@@ -132,7 +132,7 @@ a.btn.btn-secondary {
 <body>
 <section class="riwayat">
 <div class="container">
-	<h3>Riwayat belanja <?php echo $_SESSION["pelanggan"]["nama_pelanggan"];?></h3>	
+	<h3>Riwayat belanja <?php echo $_SESSION["pelanggan"]["admin_name"];?></h3>	
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -146,7 +146,7 @@ a.btn.btn-secondary {
 		<tbody>
 			<?php
 			$nomor=1;
-			$id_pelanggan = $_SESSION["pelanggan"]["id_pelanggan"];
+			$id_pelanggan = $_SESSION["pelanggan"]["admin_id"];
 			$ambil = $koneksi->query("SELECT * FROM pembelian WHERE id_pelanggan='$id_pelanggan'");
 			while ($pecah=$ambil->fetch_assoc()){
 				?>

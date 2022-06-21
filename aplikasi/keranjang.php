@@ -14,7 +14,7 @@ if(empty($_SESSION["keranjang"]) )
 if ( !isset($_SESSION["pelanggan"]))
 {
 	echo "<script>alert('silahkan login');</script>";
-	echo "<script>location='login-pelanggan.php';</script>"; 
+	echo "<script>location='login-pelanggan.php';</script>";  
 }
 ?>
 

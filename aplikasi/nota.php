@@ -5,7 +5,7 @@ include('db.php');
 
 $koneksi =new mysqli("localhost","root","","db_hasilpertanian");
 ?>
-
+ 
 
 <html>
 <head>
@@ -131,14 +131,15 @@ h1.title-basket {
 		<div class="container">
 			<h2> Detail Pembelian </h2>
 			<?php
-			$ambil =$koneksi->query("SELECT * FROM pembelian JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan WHERE pembelian.id_pembelian='$_GET[id]'");
+			$ambil = $koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.id_pelanggan=tb_admin.admin_id WHERE pembelian.id_pembelian='$_GET[id]'");
+			// var_dump($ambil); 
 			$detail =$ambil->fetch_assoc();
 			?>
 			<!--<pre> <?php //print_r($detail);?></pre>-->
 		
 			<?php
-			$idpelangganyangbeli = $detail["id_pelanggan"];
-			$idpelangganyanglogin = $_SESSION["pelanggan"]["id_pelanggan"];
+			$idpelangganyangbeli = $detail["admin_id"];
+			$idpelangganyanglogin = $_SESSION["pelanggan"]["admin_id"];
 			if ($idpelangganyangbeli!==$idpelangganyanglogin)
 			{
 				echo "<script>alert('jangan nakal');</script>";
@@ -152,14 +153,15 @@ h1.title-basket {
 					<strong>No.Pembelian: <span style='color:red'>#<?php echo $detail['id_pembelian'];?></span></strong><br>
 					Tanggal : <?php echo $detail['tanggal_pembelian'];?><br>
 					Total : Rp. <?php echo number_format($detail['total_pembelian'])?>
+					<br>
 					Status : <?php echo $detail['status_pembelian'];?>
 				</div>
 				<div class="col-md-4">
 					<h3>Pelanggan</h3>
-					<strong><?php echo $detail['nama_pelanggan'];?></strong><br>
+					<strong><?php echo $detail['admin_name'];?></strong><br>
 					<p>
-						<?php echo $detail['telepon_pelanggan'];?><br>
-						<?php echo $detail['email_pelanggan'];?>
+						<?php echo $detail['admin_telp'];?><br>
+						<?php echo $detail['admin_email'];?>
 					</p>
 				</div>
 				<div class="col-md-4">
@@ -170,54 +172,56 @@ h1.title-basket {
 				</div>
 			</div>
 			<div class='bg-white'>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>No</th>
-					<th>Nama Produk</th>
-					<th>Harga</th>
-					<th>Jumlah</th>
-					<th>Subtotal</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php $nomor=1;?>
-				<?php $ambil=$koneksi->query("SELECT * FROM pembelian_produk JOIN tb_product ON pembelian_produk.product_id=tb_product.product_id WHERE pembelian_produk.id_pembelian='$_GET[id]'");?>
-			<?php while ($pecah=$ambil->fetch_assoc()){ ?>
-				<tr>
-					<td><?php echo $nomor;?></td>
-					<td><?php echo $pecah['product_name'];?></td>
-					<td>Rp.<?php echo number_format($pecah['product_price']);?></td>
-					<td><?php echo $pecah['jumlah'];?>Kg</td>
-					<td>Rp.<?php echo number_format( $pecah['product_price']*$pecah['jumlah']);?></td>
-					<td><?php echo $detail['status_pembelian'];?></td>
-				</tr>
-				<?php $nomor++;?>
-				<?php } ?>
-			</tbody>
-			</table>
-			<div class="row">
-				<div class="col-md-7">
-				<div class="alert alert-info">
-					<p>Silahkan melakukan pembayaran <b>Rp. <?php echo $detail['total_pembelian'];?></b></a></p>
-					<?php
-					$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='admin'");
-					$d = mysqli_fetch_object($query);?>
-					<div class='logo_name'><p style='font-size:bold'>Atas Nama <span style='font-style:italic;color:#D41114'><?php echo $d->admin_name ?></span></p></div> 
-					<div class='logo_name'><p style='font-size:bold'>Bank Mandiri <span style='font-style:italic;color:#D41114'><?php echo $d->no_rekening?></span></p></div>
-				</div>
-				</div>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Nama Produk</th>
+							<th>Harga</th>
+							<th>Jumlah</th>
+							<th>Subtotal</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $nomor=1;?>
+						<?php $ambil=$koneksi->query("SELECT * FROM pembelian_produk JOIN tb_product ON pembelian_produk.product_id=tb_product.product_id WHERE pembelian_produk.id_pembelian='$_GET[id]'");?>
+					<?php while ($pecah=$ambil->fetch_assoc()){ ?>
+						<tr>
+							<td><?php echo $nomor;?></td>
+							<td><?php echo $pecah['product_name'];?></td>
+							<td>Rp.<?php echo number_format($pecah['product_price']);?></td>
+							<td><?php echo $pecah['jumlah'];?>Kg</td>
+							<td>Rp.<?php echo number_format( $pecah['product_price']*$pecah['jumlah']);?></td>
+							<td><?php echo $detail['status_pembelian'];?></td>
+						</tr>
+						<?php $nomor++;?>
+						<?php } ?>
+					</tbody>
+					</table>
+					<div class="row">
+						<div class="col-md-7">
+						<div class="alert alert-info">
+							<p>Silahkan melakukan pembayaran <b>Rp. <?php echo $detail['total_pembelian'];?></b></a></p>
+							<?php
+							$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='admin'");
+							$d = mysqli_fetch_object($query);?>
+							<div class='logo_name'><p style='font-size:bold'>Atas Nama <span style='font-style:italic;color:#D41114'><?php echo $d->admin_name ?></span></p></div> 
+							<div class='logo_name'><p style='font-size:bold'>Bank Mandiri <span style='font-style:italic;color:#D41114'><?php echo $d->no_rekening?></span></p></div>
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-7">
+						<div class="alert alert-info">
+							<p>Setelah Melakukan Pembayaran Silahkan Kunjungi <b><a href="riwayat.php">Riwayat Belanja</a></b></p>
+							
+						</div>
+						</div>
+					</div>
+				</table>
 			</div>
-			<div class="row">
-				<div class="col-md-7">
-				<div class="alert alert-info">
-					<p>Setelah Melakukan Pembayaran Silahkan Kunjungi <b><a href="riwayat.php">Riwayat Belanja</a></b></p>
-					
-				</div>
-				</div>
-			</div>
-			</table></div>
+		</div>
 	</section>
 
 </table>

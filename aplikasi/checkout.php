@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 			$alamat_pengiriman=$_POST['alamat_pengiriman'];
 		}
 		if (empty($alamat_pengiriman_er)) {
-			# code...
+			# code... 
 		}
 }
 ?>
@@ -222,19 +222,19 @@ outline-color:#2962ff;
 				<div class="col-md-4">
 					<div class="form-group">
 						<label for=""><b>Nama</b></label>
-						<input type="text" readonly value="<?php echo $_SESSION["pelanggan"]['admin_name'] ?>" class="form-control">
+						<input type="text" readonly value="<?php echo $_SESSION["pelanggan"]['admin_name'] ?>" class="form-control" required>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
 						<label for=""><b>Nomor HP</b></label>
-						<input type="text" readonly value="<?php echo $_SESSION["pelanggan"]['admin_telp'] ?>" class="form-control">
+						<input type="text" readonly value="<?php echo $_SESSION["pelanggan"]['admin_telp'] ?>" class="form-control" required>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<label for=""><b>Ongkir</b></label>
-					<select class="form-control" name="id_ongkir">
-					<option value="">Pilih Ongkos Kirim</option>
+					<select class="form-control" name="id_ongkir" required>
+					<!-- <option value>Pilih Ongkos Kirim</option> -->
 						<?php 
 						$ambil = $koneksi->query("SELECT * FROM ongkir");
 						while ($perongkir =$ambil->fetch_assoc()){
@@ -264,28 +264,28 @@ outline-color:#2962ff;
 			$ambil = $koneksi->query( "SELECT * FROM ongkir WHERE id_ongkir='$id_ongkir'");
 			$arrayongkir= $ambil ->fetch_assoc();
 			$nama_kota =$arrayongkir['nama_kota'];
-			$tarif = $arrayongkir['tarif'];
+			$tarif = $arrayongkir['tarif']*$hasil1;
 			$total_pembelian = $totalbelanja + $tarif;
-			echo"<br>";
-			var_dump($id_pelanggan);
-			echo"<br>";
-			var_dump($id_ongkir);
-			echo"<br>";
-			var_dump($tanggal_pembelian);
-			echo"<br>";
-			var_dump($alamat_pengiriman);
-			echo"<br>";
-			var_dump($ambil);
-			echo"<br>";
-			var_dump($arrayongkir);
-			echo"<br>";
-			var_dump($nama_kota);
-			echo"<br>";
-			var_dump($tarif);
-			echo"<br>";
-			var_dump($total_pembelian);
-			echo"<br>";
-			die;
+			// echo"<br>";
+			// var_dump($id_pelanggan);
+			// echo"<br>";
+			// var_dump($id_ongkir);
+			// echo"<br>";
+			// var_dump($tanggal_pembelian);
+			// echo"<br>";
+			// var_dump($alamat_pengiriman);
+			// echo"<br>";
+			// var_dump($ambil);
+			// echo"<br>";
+			// var_dump($arrayongkir);
+			// echo"<br>";
+			// var_dump($nama_kota);
+			// echo"<br>";
+			// var_dump($tarif);
+			// echo"<br>";
+			// var_dump($total_pembelian);
+			// echo"<br>";
+			// die;
 			
 			// 1. Menyimpan data ke tabel pembelian
 		

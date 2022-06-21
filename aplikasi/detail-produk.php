@@ -8,7 +8,7 @@ session_start();
 $product_id = $_GET["id"];
 //query ambil data
 $ambil=$koneksi->query("SELECT * FROM tb_product WHERE product_id='$product_id'");
-$detail=$ambil->fetch_assoc();
+$detail=$ambil->fetch_assoc(); 
 //echo "<pre>";
 //print_r($detail);
 //echo "</pre>";
