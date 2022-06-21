@@ -3,9 +3,10 @@
 include('db.php');
 $koneksi =new mysqli("localhost","root","","db_hasilpertanian");
 $idpembelian =$_GET["id"];
-$ambil = $koneksi->query("SELECT * FROM pembayaran
-LEFT JOIN pembelian ON pembayaran.id_pembelian=pembelian.id_pembelian
-WHERE pembelian.id_pembelian='$idpembelian'");
+$ambil = $koneksi->query("SELECT * FROM pembayaran 
+							LEFT JOIN pembelian 
+								ON pembayaran.id_pembelian=pembelian.id_pembelian
+							WHERE pembelian.id_pembelian='$idpembelian'");
 $detbay = $ambil->fetch_assoc();
 
 if (empty($detbay))

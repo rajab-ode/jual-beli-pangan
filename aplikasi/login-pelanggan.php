@@ -183,7 +183,7 @@ div.mini-button {
 				$_SESSION["id"] = $akun["admin_id"];
 				$_SESSION["level"] = $akun["level"];
 				
-				header ('location:home.php');
+				header ('location:home-penjual.php');
 				exit;
 			}
 			if($akun["level"] == "pembeli"){

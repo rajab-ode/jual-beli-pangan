@@ -4,7 +4,7 @@ include('db.php');
 $koneksi = new mysqli ("localhost","root","","db_hasilpertanian");
 session_start();
 
-if ($_SESSION['status_login'] != true){
+if ($_SESSION['login'] != true){
 	echo '<script>window.location="login_admin.php"</script>';
 }
 $query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual'");
@@ -85,7 +85,7 @@ a.btn.btn-success.batal {
 			</li>
 		
 			
-		<li><a href="logout.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
+		<li><a href="logout1.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
 			<span class='tooltip'>Logout</span>
 			</li>
 		</ul>

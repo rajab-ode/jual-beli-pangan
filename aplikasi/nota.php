@@ -76,6 +76,16 @@ h1.title-basket {
     color: #3860cf;
     border-radius: 5px;
 }
+a.btn.btn-success {
+    background: #0ED005;
+	transition: .2s ease-in-out;
+}
+
+a.btn.btn-success:hover{
+    background: #0E9843;
+
+}
+
 		</style>
 </head>
 <body >
@@ -199,7 +209,7 @@ h1.title-basket {
 						<?php } ?>
 					</tbody>
 					</table>
-					<div class="row">
+					<div class="row" style="">
 						<div class="col-md-7">
 						<div class="alert alert-info">
 							<p>Silahkan melakukan pembayaran <b>Rp. <?php echo $detail['total_pembelian'];?></b></a></p>
@@ -211,11 +221,14 @@ h1.title-basket {
 						</div>
 						</div>
 					</div>
+					<div style="position:absolute; right:250px; top:1150px;">
+						<i class='bx bxl-whatsapp' style='color:white; font-size:50px; position:absolute; top:-13px; left:15px;'></i>
+						<a class="btn btn-success" style="padding: 20px 25px 20px 70px; color:white; border-radius:25px; font-weight:bold" href="https://api.whatsapp.com/send?phone=6285220832295" target="_blank">Chat Penjual</a>
+					</div>
 					<div class="row">
 						<div class="col-md-7">
 						<div class="alert alert-info">
 							<p>Setelah Melakukan Pembayaran Silahkan Kunjungi <b><a href="riwayat.php">Riwayat Belanja</a></b></p>
-							
 						</div>
 						</div>
 					</div>

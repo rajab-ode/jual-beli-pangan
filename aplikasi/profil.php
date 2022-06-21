@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'db.php';
-if ($_SESSION['status_login'] != true){
+if ($_SESSION['login'] != true){
 	echo '<script>window.location="login.php"</script>';
 }
 $query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE admin_id = '".$_SESSION['id']."' ");

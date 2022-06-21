@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'db.php';
-if ($_SESSION['status_login'] != true){
+if ($_SESSION['login'] != true){
 	echo '<script>window.location="login.php"</script>';
 }
 $produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_id = '".$_GET['id']."' ");
@@ -45,7 +45,7 @@ $p = mysqli_fetch_object($produk);
 			</li>
 			
 			
-		<li><a href="logout.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
+		<li><a href="logout1.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
 			<span class='tooltip'>Logout</span>
 			</li>
 		</ul>

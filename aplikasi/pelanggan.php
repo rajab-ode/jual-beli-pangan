@@ -2,8 +2,8 @@
 
 session_start();
 include ('db.php');
-if ($_SESSION['status_login'] != true){
-	echo '<script>window.location="login_admin.php"</script>';
+if ($_SESSION['login'] != true){
+	echo '<script>window.location="login_admin.php"</script>'; 
 }
 $query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='admin'");
 $d = mysqli_fetch_object($query);
@@ -14,6 +14,12 @@ $d = mysqli_fetch_object($query);
 		<meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
 <title> E-COMMERCE </title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" type="text/css" href="icon/css/all.css">
 <script src='javascript/jquery.min.js'></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
@@ -60,8 +66,8 @@ table.table.table-bordered tr td {
 		</div>
 
 		<ul class='nav'>
-		<li><a href="home.php"><i class='bx bx-user-circle'></i></i><span class='link_name'>Home</span></a>
-			<span class='tooltip'>Home</span>
+		<li><a href="home.php"><i class='fas fa-tachometer-alt-slow'></i><span class='link_name'>Dashboard</span></a>
+			<span class='tooltip'>Dashboard</span>
 			</li>
 			
 			
@@ -106,7 +112,7 @@ table.table.table-bordered tr td {
 			<span class='tooltip'>Laporan</span>
 			</li>
 		
-		<li><a href="logout.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
+		<li><a href="logout1.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
 			<span class='tooltip'>Logout</span>
 			</li>
 		</ul>
@@ -141,13 +147,13 @@ table.table.table-bordered tr td {
 <tbody>
 	<?php $nomor=1; ?>
 	<?php 
-	$pelanggan=mysqli_query($conn,"SELECT * FROM pelanggan ");?>
+	$pelanggan=mysqli_query($conn,"SELECT * FROM tb_admin WHERE level='pembeli' ");?>
 	<?php while($pecah = $pelanggan->fetch_assoc()){ ?>
 	<tr>
 		<td> <?php echo $nomor; ?></td>
-		<td> <?php echo $pecah ['nama_pelanggan']; ?></td>
-		<td> <?php echo $pecah['email_pelanggan']; ?></td>
-		<td> <?php echo $pecah ['telepon_pelanggan']; ?></td>
+		<td> <?php echo $pecah ['admin_name']; ?></td>
+		<td> <?php echo $pecah['admin_email']; ?></td>
+		<td> <?php echo $pecah ['admin_telp']; ?></td>
 		<td>
 			<a href="" class="btn btn-danger"><i class='bx bx-trash'></i></a>
 		</td>

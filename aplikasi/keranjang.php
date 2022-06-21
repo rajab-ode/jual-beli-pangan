@@ -95,6 +95,9 @@ h1.title-basket {
 </div><div class='linklist'>
 <div class="menu-widget">
 <span class="menu-item">
+	<a href="index.php">Home</a>
+</span> 
+<span class="menu-item">
 	<a href="produk.php">Produk</a>
 </span> 
 <span class="menu-item">

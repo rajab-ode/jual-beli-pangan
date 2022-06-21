@@ -17,7 +17,7 @@ $detailpembelian = $ambil->fetch_assoc();
 
 //mendapatkan id_pelanggan yang beli
 $id_pelanggan_beli = $detailpembelian["id_pelanggan"];
-$id_pelanggan_login = $_SESSION["pelanggan"]["id_pelanggan"];
+$id_pelanggan_login = $_SESSION["pelanggan"]["admin_id"];
 if ($id_pelanggan_login !== $id_pelanggan_beli)
 {
 	echo "<script>alert('Jangan Nakal Dong!');</script>";
@@ -143,22 +143,22 @@ outline-color:transparent;
 	<div class="alert alert-info">Total tagihan anda <strong>Rp.<?php echo number_format($detailpembelian['total_pembelian']);?></strong></div>
 		<div class="form-group">
 			<label>Nama Penyetor</label>
-			<input type="text" class="form-control" name="nama">
+			<input type="text" class="form-control" name="nama" required>
 		</div>
 		<div class="form-group">
 			<label>Bank</label>
-			<input type="text" class="form-control" name="bank">
+			<input type="text" class="form-control" name="bank" required>
 		</div>
 		<div class="form-group">
 			<label>Jumlah</label>
-			<input type="number" class="form-control" name="jumlah">
+			<input type="number" class="form-control" name="jumlah" required>
 		</div>
 		<div class="form-group">
 			<label>Bukti Pembayaran</label>
-			<input style='border:none' type="file" class="form-control" name="bukti">
+			<input style='border:none' type="file" class="form-control" name="bukti" required>
 			<p class="text-danger">Foto Struk Pembayaran Minimal 1Mb</p>
 		</div>
-		<button class="btn btn-primary" name="kirim">Kirim</button>
+		<button class="btn btn-primary" name="kirim" type="submit">Kirim</button>
 		<button class="btn btn-default" ><a style='color:#fff;' href='riwayat.php'>Back</a></button>
 	</form>
 </div>

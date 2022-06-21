@@ -2,7 +2,7 @@
 
 session_start();
 include ('db.php');
-if ($_SESSION['status_login'] != true){
+if ($_SESSION['login'] != true){
 	echo '<script>window.location="login_admin.php"</script>';
 }
 $query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='admin'");
@@ -15,12 +15,21 @@ if (isset($_POST["kirim"]))
 {
 	$tgl_mulai = $_POST["tglm"];
 	$tgl_selesai = $_POST["tgls"];
-	$ambil = $koneksi->query("SELECT * FROM pembelian pm LEFT JOIN pelanggan pl ON pm.id_pelanggan=pl.id_pelanggan WHERE tanggal_pembelian BETWEEN '$tgl_mulai' AND '$tgl_selesai'");
+	$ambil = $koneksi->query("SELECT * FROM pembelian LEFT JOIN tb_admin ON pembelian.id_pelanggan=tb_admin.admin_id WHERE tanggal_pembelian BETWEEN '$tgl_mulai' AND '$tgl_selesai'");
 	while($pecah = $ambil->fetch_assoc())
 	{
 		$semuadata[]=$pecah;
+
 	}
 }
+
+$ambil1 = $koneksi->query("SELECT * FROM pembelian LEFT JOIN tb_admin ON pembelian.id_pelanggan=tb_admin.admin_id");
+
+// foreach($ambil as $row){
+// 	var_dump($row); 
+// 	echo"<br>";
+// }
+
 ?>
 <!doctype html>
 <html>
@@ -28,6 +37,12 @@ if (isset($_POST["kirim"]))
 		<meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
 <title>Laporan</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" type="text/css" href="icon/css/all.css">
 <script src='javascript/jquery.min.js'></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
@@ -84,8 +99,8 @@ table.table.table-bordered tr td {
 		</div>
 
 		<ul class='nav'>
-		<li><a href="home.php"><i class='bx bx-user-circle'></i></i><span class='link_name'>Home</span></a>
-			<span class='tooltip'>Home</span>
+		<li><a href="home.php"><i class='fas fa-tachometer-alt-slow'></i><span class='link_name'>Dashboard</span></a>
+			<span class='tooltip'>Dashboard</span>
 			</li>
 			
 			
@@ -130,7 +145,7 @@ table.table.table-bordered tr td {
 			<span class='tooltip'>Laporan</span>
 			</li>
 		
-		<li><a href="logout.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
+		<li><a href="logout1.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
 			<span class='tooltip'>Logout</span>
 			</li>
 		</ul>
@@ -142,81 +157,86 @@ table.table.table-bordered tr td {
 
 	</div>
 	
-	<div class="main-content">
-	<div class='dashboard-profil'>
-		<div class="section-admin">
-		<div class="container">
-			<p class="alert_info dashboard_alert">Berikut Data <a href="#form-profil-admin">Laporan</a> anda dibawah !</p>
-			<h3>Dashboard Laporan</h3>
-			<div class="box box2"><h2> Laporan Pembelian dari <?php echo $tgl_mulai ?> hingga <?php echo $tgl_selesai ?></h2>
-	<br>
+	<div class="main-content" style="">
+		<div class='dashboard-profil'>
+			<div class="section-admin">
+				<div class="container">
+					<p class="alert_info dashboard_alert">Berikut Data <a href="#form-profil-admin">Laporan</a> anda dibawah !</p>
+					<h3>Dashboard Laporan</h3>
+					<div class="box box2" style=" margin-bottom: 100px;">
+						<h2> Laporan Pembelian dari <?php echo $tgl_mulai ?> hingga <?php echo $tgl_selesai ?></h2>
+						<br>	
 
-<thead>
-<tr>
-<form method="post">
-	<div class="row" style='display:flex'>
-		<div class="col-md-5">
-		<div class="form-group">
-			<label>Tanggal Mulai</label>
-			<input type="date" class="form-control" name="tglm" value="<?php echo $tgl_mulai ?>">
-		</div>
-		</div>
-		<div class="col-md-5">
-		<div class="form-group">
-			<label>Tanggal Selesai</label>
-			<input type="date" class="form-control" name="tgls" value="<?php echo $tgl_selesai ?>">
-		</div>
-		</div>
-		<div class="col-md-2">
-			<label>&nbsp;</label>
-			<button class="btn btn-primary" name="kirim" style='margin:0 0 10px;'>Lihat</button>
+						<tr>
+						<form method="post">
+							<div class="row" style='display:flex'>
+								<div class="col-md-5">
+								<div class="form-group">
+									<label>Tanggal Mulai</label>
+									<input type="date" class="form-control" name="tglm" value="<?php echo $tgl_mulai ?>">
+								</div>
+								</div>
+								<div class="col-md-5">
+								<div class="form-group">
+									<label>Tanggal Selesai</label>
+									<input type="date" class="form-control" name="tgls" value="<?php echo $tgl_selesai ?>">
+								</div>
+								</div>
+								<div class="col-md-2">
+									<label>&nbsp;</label>
+									<button class="btn btn-primary" name="kirim" style='margin:0 0 10px;'>Lihat</button>
+								</div>
+							</div>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>No</th>
+										<th>Pelanggan</th>
+										<th>Tanggal</th>
+										<th>Status</th>
+										<th>Jumlah</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php $total=0;?>
+									<?php $no = 1;?>
+									<?php foreach ($ambil1 as $key):?>
+									<?php $total+=$key['total_pembelian']?>
+									<tr>
+										<td><?php echo $no++; ?></td>
+										<td><?php echo $key["admin_name"]?></td>
+										<td><?php echo $key["tanggal_pembelian"]?></td>
+										<td><?php echo $key["status_pembelian"]?></td>
+										<td>Rp.<?php echo number_format($key["total_pembelian"])?> </td>
+									</tr>
+									<?php endforeach ?>
+								</tbody>
+								<tfoot>
+									<tr>
+									<th colspan="4">Total</th>
+									<th><center>Rp.<?php echo number_format($total)?></center></th>
+									</tr>
+									</tfoot>
+								</tr>
+						
+						</form>
+					</div>
+				
+				</div>
+			</div>
 		</div>
 	</div>
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>Pelanggan</th>
-				<th>Tanggal</th>
-				<th>Jumlah</th>
-				<th>Status</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php $total=0;?>
-			<?php foreach ($semuadata as $key => $value):?>
-			<?php $total+=$value['total_pembelian']?>
-			<tr>
-				<td><?php echo $key+1;?></td>
-				<td><?php echo $value["nama_pelanggan"]?></td>
-				<td><?php echo $value["tanggal_pembelian"]?></td>
-				<td>Rp.<?php echo number_format($value["total_pembelian"])?> </td>
-				<td><?php echo $value["status_pembelian"]?></td>
-			</tr>
-			<?php endforeach ?>
-		</tbody>
-		<tfoot>
-			<tr>
-			<th colspan="3">Total</th>
-			<th>Rp.<?php echo number_format($total)?></th>
-			</tr>
-			</tfoot>
-		</tr>
-	</thead>
-	
-</form>
-<div class='footer-sidebar'>
-			<div class='footer-image'>
-				<img src='logo-toba.png'/>
-				<div class="footer-desc">
+	<div class='footer-sidebar' style="position: absolute; bottom:-100px;">
+		<div class='footer-image'>
+			<img src='logo-toba.png'/>
+			<div class="footer-desc">
 				<span class='goverment'>Pemerintah Kabupaten Toba</span>
-					<span class='dinas-gov'>Dinas Pertanian &amp; Perikanan Tobasa </span>
-					<p>Jl. Pertanian No.1, Huta Bulu Mejan, Kec. Balige, Toba, Sumatera Utara 22312</p>
+				<span class='dinas-gov'>Dinas Pertanian &amp; Perikanan Tobasa </span>
+				<p>Jl. Pertanian No.1, Huta Bulu Mejan, Kec. Balige, Toba, Sumatera Utara 22312</p>
 					
 			</div>
-				</div>
-				
-			</div>
+		</div>
+	
 	</div>
 <script>
 	let btn = document.querySelector('#btn');
@@ -234,3 +254,5 @@ $(function(){
   });
 });
 </script>
+</body>
+</html>
