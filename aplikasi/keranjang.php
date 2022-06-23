@@ -151,6 +151,7 @@ h1.title-basket {
 				<td>Rp. <?php echo number_format($pecah["product_price"]); ?> </td>
 				<td><?php echo $jumlah; ?>Kg</td>
 				<td>Rp. <?php echo number_format($subharga); ?></td>
+				<!-- <input type="text" value="<?= $pecah["penjual_id"] ?>"> -->
 				<td> <a href="hapusprodukkeranjang.php?id=<?php echo $product_id ?>" class="btn-danger"><i class="bx bx-trash"></i></a> </td>
 			</tr>
 			<?php $nomor++; ?>
@@ -159,8 +160,9 @@ h1.title-basket {
 		</tbody>	
 	<tfoot>
 	<tr style='background:#212121;color:#fff;font-weight:normal'>
-		<th colspan="5">Total Belanja </th>
-		<th>Rp.<?php echo number_format($totalbelanja);?>
+		<th colspan="2">Total Belanja </th>
+		<th colspan="2"></th>
+		<th colspan="1">Rp.<?php echo number_format($totalbelanja);?>
 			
 		</th>	
 	</tr>
