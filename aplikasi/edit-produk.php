@@ -6,7 +6,8 @@ if ($_SESSION['login'] != true){
 }
 $produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_id = '".$_GET['id']."' ");
 $p = mysqli_fetch_object($produk);
-$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual'");
+$id = $_SESSION["id"];
+$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual' AND admin_id = $id");
 $d = mysqli_fetch_object($query);
 
 
@@ -18,7 +19,10 @@ $d = mysqli_fetch_object($query);
 <meta name="viewport" content="width-device-width, initial-scale=1">
 <title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="icon/css/all.css">
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body >
@@ -27,25 +31,30 @@ $d = mysqli_fetch_object($query);
 		<div class='logo-content'>
 		<div class='logo'>
 			<i class='bx bx-menu' id='btn'></i>
-		<div class='logo_name'><p style='font-size:small'>Halo...<br/>Selamat datang... <span style='font-style:italic;color:#2962ff'><?php echo $d->level?></span></p></div>
+			<div class='logo_name'>
+				<i class="fa-solid fa-user"  style="margin-left: -10px;"></i>
+				<div style="position:absolute; top:20px; left:100px;"> 
+						<p style='font-size:small' >Halo <br>
+						<span style='font-style:italic;color:#2962ff'><?php echo $d->username ?></span></p></div>
+				</div>
+			</div>
 		
 			
 		</div>
 
 		<ul class='nav'>
-			<li><a href="home.php"><i class='bx bx-home'></i><span class='link_name'>Home</span></a>
-			<span class='tooltip'>Home</span>
+			<li><a href="home-penjual.php"><i class='bx bx-user-circle'></i></i><span class='link_name'>Profil</span></a>
+			<span class='tooltip'>Profil</span>
 			</li>
 			
-			
-			<li><a href="data-kategori.php"><i class='bx bx-label'></i><span class='link_name'>Data Kategori</span></a>
-				<span class='tooltip'>Data Kategori</span></li>
-			
-			
-			<li><a href="data-produk.php"><i class='bx bxl-product-hunt' ></i><span class='link_name'>Data Produk</span></a>
+			<li><a href="data-produk1.php?halaman=produk"><i class='bx bxl-product-hunt' ></i><span class='link_name'>Data Produk</span></a>
 			<span class='tooltip'>Data Produk</span>
 			</li>
 			
+			<li><a href="pembelian1.php?halaman=pembelian"><i class='bx bxl-product-hunt' ></i><span class='link_name'>Data Pembelian </span></a>
+			<span class='tooltip'>Data Pembelian</span>
+			</li>
+		
 			
 		<li><a href="logout1.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
 			<span class='tooltip'>Logout</span>

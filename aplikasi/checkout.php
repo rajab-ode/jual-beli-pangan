@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 		$alamat_pengiriman_er = " Maaf Alamat Pengigiriman harus diisi";
 		}else{
 			$alamat_pengiriman=$_POST['alamat_pengiriman'];
-		}
+		} 
 		if (empty($alamat_pengiriman_er)) {
 			# code... 
 		}

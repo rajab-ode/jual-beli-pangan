@@ -6,7 +6,9 @@ session_start();
 if ($_SESSION['login'] != true){
 	echo '<script>window.location="login_admin.php"</script>';
 }
-$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual'");
+$id = $_SESSION["id"];
+// var_dump($id); die;
+$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual' AND admin_id = $id");
 $d = mysqli_fetch_object($query);
 ?>
 <!doctype html>
@@ -16,6 +18,10 @@ $d = mysqli_fetch_object($query);
 <meta name="viewport" content="width-device-width, initial-scale=1">
 <title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="icon/css/all.css">
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <style>
 table {
@@ -67,7 +73,13 @@ a.btn.btn-success.batal {
 		<div class='logo-content'>
 		<div class='logo'>
 			<i class='bx bx-menu' id='btn'></i>
-			<div class='logo_name'><p style='font-size:small'>Halo...<br/>Selamat datang... <span style='font-style:italic;color:#2962ff'><?php echo $d->level ?></span></p></div>
+			<div class='logo_name'>
+				<i class="fa-solid fa-user"  style="margin-left: -10px;"></i>
+				<div style="position:absolute; top:20px; left:100px;"> 
+						<p style='font-size:small' >Halo <br>
+						<span style='font-style:italic;color:#2962ff'><?php echo $d->username ?></span></p></div>
+				</div>
+			</div>
 		</div>
 
 		<ul class='nav'>
@@ -84,7 +96,7 @@ a.btn.btn-success.batal {
 			</li>
 		
 			
-		<li><a href="logout.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
+		<li><a href="logout1.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
 			<span class='tooltip'>Logout</span>
 			</li>
 		</ul>
@@ -128,7 +140,7 @@ a.btn.btn-success.batal {
 </thead>
 <tbody>
 	<?php $nomor=1; ?>
-	<?php $ambil=$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id");?>
+	<?php $ambil=$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.id_penjual=tb_admin.admin_id WHERE id_penjual = $id");?>
 	<?php while ($pecah = $ambil->fetch_assoc()){ ?>
 	<tr>
 		<td> <?php echo $nomor; ?></td>

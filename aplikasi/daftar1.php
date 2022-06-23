@@ -16,8 +16,8 @@ include('db.php');
 				$norek = $_POST["no_rekening"];
 				$level = $_POST["level"];
 
-				$cek =  mysqli_query($conn, "SELECT * FROM tb_admin WHERE username = '".$user."' AND password ='".MD5($pass)."'");
-				$yangcocok = $ambil ->num_rows;
+				$cek =  mysqli_query($conn, "SELECT * FROM tb_admin WHERE username = '".$username."' AND password ='".MD5($password)."'");
+				$yangcocok = $cek ->num_rows;
 				if ($yangcocok==1)
 				{
 					echo "<script>alert('pendaftaran gagal, email sudah digunakan'); </script>";
@@ -26,7 +26,7 @@ include('db.php');
 				else {
 					//query insert ke tabel pelanggan
 					$sql=mysqli_query($conn,"INSERT INTO tb_admin(admin_name,username,password,admin_telp,admin_email,admin_address,jenis_bank,no_rekening,level) VALUES ('$nama','$username','$password','$telepon','$email','$alamat','$bank','$norek','$level') ");
-								
+					
 					echo "<script>alert('pendaftaran sukses, silahkan login'); </script>";
 					echo "<script>location='login-pelanggan.php'; </script>";
 				}

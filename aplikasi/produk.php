@@ -72,7 +72,7 @@ $login = $_SESSION["login"];
 	<div class ="section bgshop">
 		<div class="container">
 				<h3> Produk</h3>
-				<div class="card">
+				<div class="card"> 
 					<?php
 						if($_GET['search'] !='' || $_GET['kat'] !=''){
 							$where ="AND product_name LIKE '%".$_GET['search']."%' AND category_id LIKE '%". $_GET['kat']."%' ";

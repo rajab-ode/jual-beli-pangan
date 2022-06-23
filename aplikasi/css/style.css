@@ -325,7 +325,7 @@ display:block;
 	font-size:30px;
 	align-items:center;	
 	border-bottom: thin solid #dadce0;
-    padding: 10px 0;
+    /* padding: 10px 0 50px 0; */
 }
 .sidebar.active .logo-content .logo_name {
 	font-size:15px;

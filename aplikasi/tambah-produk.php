@@ -2,9 +2,10 @@
 session_start();
 include ('db.php');
 if ($_SESSION['login'] != true){
-	echo '<script>window.location="login_admin.php"</script>';
+	echo '<script>window.location="login_admin.php"</script>'; 
 }
-$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual'");
+$id = $_SESSION["id"];
+$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual' AND admin_id = $id");
 $d = mysqli_fetch_object($query);
 ?>
 <!doctype html>
@@ -14,6 +15,10 @@ $d = mysqli_fetch_object($query);
 <meta name="viewport" content="width-device-width, initial-scale=1">
 <title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="icon/css/all.css">
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 </head>
@@ -23,7 +28,13 @@ $d = mysqli_fetch_object($query);
 		<div class='logo-content'>
 		<div class='logo'>
 			<i class='bx bx-menu' id='btn'></i>
-			<div class='logo_name'><p style='font-size:small'>Halo...<br/>Selamat datang... <span style='font-style:italic;color:#2962ff'><?php echo $d->level?></span></p></div>
+			<div class='logo_name'>
+				<i class="fa-solid fa-user"  style="margin-left: -10px;"></i>
+				<div style="position:absolute; top:20px; left:100px;"> 
+						<p style='font-size:small' >Halo <br>
+						<span style='font-style:italic;color:#2962ff'><?php echo $d->username ?></span></p></div>
+				</div>
+			</div>
 		
 			
 		</div>
@@ -84,6 +95,7 @@ $d = mysqli_fetch_object($query);
 					
 					</select>
 					
+					<input type = "text" name="id" class="input-control" placeholder ="" required value="<?= $id ?>" hidden>
 					<input type = "text" name="nama" class="input-control" placeholder ="Nama Produk" required>
 					<input type = "text" name="harga" class="input-control" placeholder ="Harga" required>	
 					<input type = "text" name="berat" class="input-control" placeholder ="Berat" required>	
@@ -99,6 +111,7 @@ $d = mysqli_fetch_object($query);
 					if(isset($_POST['submit'])){
 						//print_r($_FILES['gambar']);
 						// menampung inputan dari form
+						$id = $_POST["id"];
 						$kategori =$_POST['kategori'];
 						$nama =$_POST['nama'];
 						$harga =$_POST['harga'];
@@ -112,7 +125,31 @@ $d = mysqli_fetch_object($query);
 						$type1 = explode('.', $filename);
 						$type2 = $type1[1];
 						$newname = 'produk'.time().'.'.$type2;
-			
+						// var_dump($kategori);
+						// echo"<br>";
+						// var_dump($nama);
+						// echo"<br>";
+						// var_dump($harga);
+						// echo"<br>";
+						// var_dump($berat);
+						// echo"<br>";
+						// var_dump($stok);
+						// echo"<br>";
+						// var_dump($deskripsi);
+						// echo"<br>";
+						// var_dump($status);
+						// echo"<br>";
+						// var_dump($filename);
+						// echo"<br>";
+						// var_dump($tmp_name);
+						// echo"<br>";
+						// var_dump($type1);
+						// echo"<br>";
+						// var_dump($type2);
+						// echo"<br>";
+						// var_dump($newname);
+						// echo"<br>";
+						// die;
 						// menampung data format file yang diijinkan 
 						$tipe_diizinkan = array ('jpg', 'jpeg','png','gif');
 						
@@ -127,6 +164,7 @@ $d = mysqli_fetch_object($query);
 							$insert = mysqli_query ($conn, "INSERT INTO tb_product VALUES (
 									null,
 									'".$kategori."',
+									'".$id."',
 									'".$nama."',
 									'".$harga."',
 									'".$berat."',
