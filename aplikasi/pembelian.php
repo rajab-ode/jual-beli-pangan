@@ -15,7 +15,7 @@ $d = mysqli_fetch_object($query);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
-<title> E-COMMERCE </title>
+<title>E-Marketplace</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -157,11 +157,11 @@ a.btn.btn-success.batal {
 </thead>
 <tbody>
 	<?php $nomor=1; ?>
-	<?php $ambil=$koneksi->query("SELECT * FROM pembelian JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan");?>
+	<?php $ambil=$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id");?>
 	<?php while ($pecah = $ambil->fetch_assoc()){ ?>
 	<tr>
 		<td> <?php echo $nomor; ?></td>
-		<td> <?php echo $pecah ['nama_pelanggan']; ?></td>
+		<td> <?php echo $pecah ['admin_name']; ?></td>
 		<td> <?php echo $pecah['tanggal_pembelian']; ?></td>
 		<td class='<?php echo $pecah['status_pembelian']; ?>'> <?php echo $pecah['status_pembelian']; ?></td>
 		<td> <?php echo $pecah ['total_pembelian']; ?></td>

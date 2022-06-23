@@ -28,7 +28,7 @@ include('db.php');
 					$sql=mysqli_query($conn,"INSERT INTO tb_admin(admin_name,username,password,admin_telp,admin_email,admin_address,jenis_bank,no_rekening,level) VALUES ('$nama','$username','$password','$telepon','$email','$alamat','$bank','$norek','$level') ");
 								
 					echo "<script>alert('pendaftaran sukses, silahkan login'); </script>";
-					echo "<script>location='login.php'; </script>";
+					echo "<script>location='login-pelanggan.php'; </script>";
 				}
 			}
 ?>

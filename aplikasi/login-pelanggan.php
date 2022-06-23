@@ -194,7 +194,7 @@ div.mini-button {
 				$_SESSION["pelanggan"] =$akun;
 
 				
-				header ('location:index.php');
+				header ('location:produk.php');
 				exit;
 			}
 			//anda sukses login

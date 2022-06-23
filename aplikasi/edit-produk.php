@@ -6,7 +6,8 @@ if ($_SESSION['login'] != true){
 }
 $produk = mysqli_query($conn, "SELECT * FROM tb_product WHERE product_id = '".$_GET['id']."' ");
 $p = mysqli_fetch_object($produk);
-
+$query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual'");
+$d = mysqli_fetch_object($query);
 
 
 ?>
@@ -15,7 +16,7 @@ $p = mysqli_fetch_object($produk);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
-<title> E-COMMERCE </title>
+<title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
@@ -26,8 +27,9 @@ $p = mysqli_fetch_object($produk);
 		<div class='logo-content'>
 		<div class='logo'>
 			<i class='bx bx-menu' id='btn'></i>
-		<div class='logo_name'>Admin</div>
+		<div class='logo_name'><p style='font-size:small'>Halo...<br/>Selamat datang... <span style='font-style:italic;color:#2962ff'><?php echo $d->level?></span></p></div>
 		
+			
 		</div>
 
 		<ul class='nav'>
@@ -148,7 +150,7 @@ $p = mysqli_fetch_object($produk);
 												WHERE product_id = '".$p->product_id."' ");
 						if($update){
 								echo '<script>alert("Ubah Data Berhasil")</script>';
-								echo '<script>window.location="data-produk.php"</script>';
+								echo '<script>window.location="data-produk1.php"</script>';
 								
 							} else {
 								echo 'gagal'. mysqli_error($conn);

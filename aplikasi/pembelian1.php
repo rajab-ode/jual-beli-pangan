@@ -3,7 +3,6 @@
 include('db.php');
 $koneksi = new mysqli ("localhost","root","","db_hasilpertanian");
 session_start();
-
 if ($_SESSION['login'] != true){
 	echo '<script>window.location="login_admin.php"</script>';
 }
@@ -15,7 +14,7 @@ $d = mysqli_fetch_object($query);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
-<title> E-COMMERCE </title>
+<title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <style>
@@ -85,7 +84,7 @@ a.btn.btn-success.batal {
 			</li>
 		
 			
-		<li><a href="logout1.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
+		<li><a href="logout.php"><i class='bx bx-log-out'></i><span class='link_name'>Logout</span></a>
 			<span class='tooltip'>Logout</span>
 			</li>
 		</ul>
@@ -129,11 +128,11 @@ a.btn.btn-success.batal {
 </thead>
 <tbody>
 	<?php $nomor=1; ?>
-	<?php $ambil=$koneksi->query("SELECT * FROM pembelian JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan");?>
+	<?php $ambil=$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id");?>
 	<?php while ($pecah = $ambil->fetch_assoc()){ ?>
 	<tr>
 		<td> <?php echo $nomor; ?></td>
-		<td> <?php echo $pecah ['nama_pelanggan']; ?></td>
+		<td> <?php echo $pecah ['admin_name']; ?></td>
 		<td> <?php echo $pecah['tanggal_pembelian']; ?></td>
 		<td class='<?php echo $pecah['status_pembelian']; ?>'> <?php echo $pecah['status_pembelian']; ?></td>
 		<td> <?php echo $pecah ['total_pembelian']; ?></td>

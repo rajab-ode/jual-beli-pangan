@@ -16,7 +16,7 @@ $k = mysqli_fetch_object($kategori);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
-<title> E-COMMERCE </title>
+<title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>

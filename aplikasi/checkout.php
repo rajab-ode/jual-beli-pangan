@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
-<title> E-COMMERCE </title>
+<title> Checkout </title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<style>
@@ -257,7 +257,7 @@ outline-color:#2962ff;
 		<?php
 		if (isset($_POST["checkout"]))
 		{
-			$id_pelanggan = $_SESSION["pelanggan"]["admin_id"];
+			$admin_id = $_SESSION["pelanggan"]["admin_id"];
 			$id_ongkir = $_POST["id_ongkir"];
 			$tanggal_pembelian = date("Y-m-d");
 			$alamat_pengiriman = $_POST['alamat_pengiriman'];
@@ -289,7 +289,7 @@ outline-color:#2962ff;
 			
 			// 1. Menyimpan data ke tabel pembelian
 		
-			$koneksi->query("INSERT INTO pembelian (id_pelanggan,id_ongkir,tanggal_pembelian,total_pembelian,nama_kota,tarif,alamat_pengiriman) VALUES ('$id_pelanggan','$id_ongkir','$tanggal_pembelian', '$total_pembelian','$nama_kota','$tarif','$alamat_pengiriman') " );
+			$koneksi->query("INSERT INTO pembelian (admin_id,id_ongkir,tanggal_pembelian,total_pembelian,nama_kota,tarif,alamat_pengiriman) VALUES ('$admin_id','$id_ongkir','$tanggal_pembelian', '$total_pembelian','$nama_kota','$tarif','$alamat_pengiriman') " );
 			
 			//mendapatkan id_pembelian barusan
 			$id_pembelian_barusan = $koneksi->insert_id;

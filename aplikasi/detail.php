@@ -4,7 +4,7 @@ $koneksi = new mysqli ("localhost","root","","db_hasilpertanian");
 ?>
 <?php
 			$idpembelian = $_GET["id"];
-			$ambil =$koneksi->query("SELECT * FROM pembelian JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan WHERE pembelian.id_pembelian='$idpembelian'");
+			$ambil =$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id WHERE pembelian.id_pembelian='$idpembelian'");
 			$detail =$ambil->fetch_assoc();
 			?>
 <!--</pre><?php //print_r($detail);?></pre>-->
@@ -88,10 +88,10 @@ table.table.table-bordered tr td {
 				</div>
 				<div class="col-md-4">
 					<h3>Pelanggan</h3>
-					<strong><?php echo $detail['nama_pelanggan'];?></strong><br>
+					<strong><?php echo $detail['admin_name'];?></strong><br>
 			
-						<?php echo $detail['telepon_pelanggan'];?><br>
-						<?php echo $detail['email_pelanggan'];?>
+						<?php echo $detail['admin_telp'];?><br>
+						<?php echo $detail['admin_email'];?>
 					
 				</div>
 				<div class="col-md-4">

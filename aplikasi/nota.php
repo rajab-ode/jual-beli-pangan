@@ -141,7 +141,7 @@ a.btn.btn-success:hover{
 		<div class="container">
 			<h2> Detail Pembelian </h2>
 			<?php
-			$ambil = $koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.id_pelanggan=tb_admin.admin_id WHERE pembelian.id_pembelian='$_GET[id]'");
+			$ambil = $koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id WHERE pembelian.id_pembelian='$_GET[id]'");
 			// var_dump($ambil); 
 			$detail =$ambil->fetch_assoc();
 			?>

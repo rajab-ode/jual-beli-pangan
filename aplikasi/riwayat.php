@@ -17,7 +17,7 @@ if (!isset($_SESSION["pelanggan"]) or empty($_SESSION["pelanggan"]))
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
-<title> Riwayat Pembeli </title>
+<title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<style>
@@ -146,8 +146,8 @@ a.btn.btn-secondary {
 		<tbody>
 			<?php
 			$nomor=1;
-			$id_pelanggan = $_SESSION["pelanggan"]["admin_id"];
-			$ambil = $koneksi->query("SELECT * FROM pembelian WHERE id_pelanggan='$id_pelanggan'");
+			$admin_id = $_SESSION["pelanggan"]["admin_id"];
+			$ambil = $koneksi->query("SELECT * FROM pembelian WHERE admin_id='$admin_id'");
 			while ($pecah=$ambil->fetch_assoc()){
 				?>
 			<tr>
@@ -165,7 +165,9 @@ a.btn.btn-secondary {
 			<?php $nomor++;?>
 			<?php }?>
 		</tbody>
+		
 	</table>
+	
 </div>	
 </section>
 <div id='footer'>

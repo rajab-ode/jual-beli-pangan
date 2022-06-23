@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2022 at 02:55 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Waktu pembuatan: 22 Jun 2022 pada 00.18
+-- Versi server: 10.4.21-MariaDB
+-- Versi PHP: 7.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `checkout`
+-- Struktur dari tabel `checkout`
 --
 
 CREATE TABLE `checkout` (
@@ -41,7 +41,7 @@ CREATE TABLE `checkout` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `checkout`
+-- Dumping data untuk tabel `checkout`
 --
 
 INSERT INTO `checkout` (`idcheckout`, `noktp`, `nama`, `notelp`, `kodepos`, `alamat`, `alamat_pengiriman`, `jenis_pengiriman`, `tgl_checkout`, `wkt_checkout`) VALUES
@@ -61,7 +61,7 @@ INSERT INTO `checkout` (`idcheckout`, `noktp`, `nama`, `notelp`, `kodepos`, `ala
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ongkir`
+-- Struktur dari tabel `ongkir`
 --
 
 CREATE TABLE `ongkir` (
@@ -71,18 +71,18 @@ CREATE TABLE `ongkir` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ongkir`
+-- Dumping data untuk tabel `ongkir`
 --
 
 INSERT INTO `ongkir` (`id_ongkir`, `nama_kota`, `tarif`) VALUES
-(1, 'JNE', 20000),
+(1, 'JNE', 3000),
 (3, 'J&T', 1500),
 (4, 'POS INDONESIA', 1000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pelanggan`
+-- Struktur dari tabel `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
@@ -95,7 +95,7 @@ CREATE TABLE `pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `pelanggan`
+-- Dumping data untuk tabel `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `email_pelanggan`, `password_pelanggan`, `nama_pelanggan`, `telepon_pelanggan`, `alamat_pelanggan`) VALUES
@@ -105,7 +105,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `email_pelanggan`, `password_pelanggan`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pembayaran`
+-- Struktur dari tabel `pembayaran`
 --
 
 CREATE TABLE `pembayaran` (
@@ -121,7 +121,7 @@ CREATE TABLE `pembayaran` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pembelian`
+-- Struktur dari tabel `pembelian`
 --
 
 CREATE TABLE `pembelian` (
@@ -137,10 +137,21 @@ CREATE TABLE `pembelian` (
   `resi_pengiriman` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `pembelian`
+--
+
+INSERT INTO `pembelian` (`id_pembelian`, `id_pelanggan`, `id_ongkir`, `tanggal_pembelian`, `total_pembelian`, `nama_kota`, `tarif`, `alamat_pengiriman`, `status_pembelian`, `resi_pengiriman`) VALUES
+(129, 0, 0, '2022-06-21', 82500, '', 0, 'wakatobi', 'Pending', ''),
+(130, 0, 0, '2022-06-21', 65000, '', 0, '', 'Pending', ''),
+(131, 13, 1, '2022-06-21', 17500, 'JNE', 3000, 'Wakatobi', 'Pending', ''),
+(132, 13, 1, '2022-06-21', 35000, 'JNE', 6000, 'eaa', 'Pending', ''),
+(133, 13, 1, '2022-06-21', 38000, 'JNE', 6000, 'eeee', 'Pending', '');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pembelian_produk`
+-- Struktur dari tabel `pembelian_produk`
 --
 
 CREATE TABLE `pembelian_produk` (
@@ -150,10 +161,26 @@ CREATE TABLE `pembelian_produk` (
   `jumlah` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `pembelian_produk`
+--
+
+INSERT INTO `pembelian_produk` (`id_pembelian_produk`, `id_pembelian`, `product_id`, `jumlah`) VALUES
+(112, 129, 7, 2),
+(113, 129, 6, 2),
+(114, 129, 5, 1),
+(115, 130, 7, 2),
+(116, 130, 5, 1),
+(117, 130, 6, 1),
+(118, 131, 7, 1),
+(119, 132, 7, 2),
+(120, 133, 7, 1),
+(121, 133, 6, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_admin`
+-- Struktur dari tabel `tb_admin`
 --
 
 CREATE TABLE `tb_admin` (
@@ -166,11 +193,11 @@ CREATE TABLE `tb_admin` (
   `admin_address` text NOT NULL,
   `jenis_bank` varchar(50) NOT NULL,
   `no_rekening` varchar(25) NOT NULL,
-  `level` enum('admin','penjual') NOT NULL
+  `level` enum('admin','penjual','pembeli') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_admin`
+-- Dumping data untuk tabel `tb_admin`
 --
 
 INSERT INTO `tb_admin` (`admin_id`, `admin_name`, `username`, `password`, `admin_telp`, `admin_email`, `admin_address`, `jenis_bank`, `no_rekening`, `level`) VALUES
@@ -179,12 +206,13 @@ INSERT INTO `tb_admin` (`admin_id`, `admin_name`, `username`, `password`, `admin
 (8, 'Alex Leo Nardo Sipayung', 'Alex', 'alex', '082277654318', 'alexleo11@yahoo.com', 'Sidikalang, Bongbongan No 58 Belang Malum', 'BRI', '', ''),
 (9, 'Alex Leo Nardo Sipayung', 'Alex', 'alex', '082277654318', 'alexleo11@yahoo.com', 'Sidikalang, Bongbongan No 58 Belang Malum', 'BRI', '019401064654505', ''),
 (10, 'Alex Leo Nardo Sipayung', 'Alex Sipayung', 'alex11', '082277654318', 'alexleo11@yahoo.com', 'Sidikalang', 'BRI', '019401064654505', 'penjual'),
-(11, 'Febry Siregar', 'Febry', 'febry', '082260934706', 'febrysrg3@gmail.com', 'Berampu', 'MANDIRI', '019401064654505', 'penjual');
+(11, 'Febry Siregar', 'Febry', 'febry', '082260934706', 'febrysrg3@gmail.com', 'Berampu', 'MANDIRI', '019401064654505', 'penjual'),
+(13, 'rajab', 'rajab', '123', '09', 'as', 'qw', '', '', 'pembeli');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_category`
+-- Struktur dari tabel `tb_category`
 --
 
 CREATE TABLE `tb_category` (
@@ -193,7 +221,7 @@ CREATE TABLE `tb_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_category`
+-- Dumping data untuk tabel `tb_category`
 --
 
 INSERT INTO `tb_category` (`category_id`, `category_name`) VALUES
@@ -202,7 +230,7 @@ INSERT INTO `tb_category` (`category_id`, `category_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_login`
+-- Struktur dari tabel `tb_login`
 --
 
 CREATE TABLE `tb_login` (
@@ -214,7 +242,7 @@ CREATE TABLE `tb_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_login`
+-- Dumping data untuk tabel `tb_login`
 --
 
 INSERT INTO `tb_login` (`id_user`, `nama_user`, `username`, `password`, `level`) VALUES
@@ -224,7 +252,7 @@ INSERT INTO `tb_login` (`id_user`, `nama_user`, `username`, `password`, `level`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_penjual`
+-- Struktur dari tabel `tb_penjual`
 --
 
 CREATE TABLE `tb_penjual` (
@@ -238,7 +266,7 @@ CREATE TABLE `tb_penjual` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_penjual`
+-- Dumping data untuk tabel `tb_penjual`
 --
 
 INSERT INTO `tb_penjual` (`penjual_id`, `penjual_name`, `username`, `password`, `penjual_telp`, `penjual_email`, `penjual_address`) VALUES
@@ -250,7 +278,7 @@ INSERT INTO `tb_penjual` (`penjual_id`, `penjual_name`, `username`, `password`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_product`
+-- Struktur dari tabel `tb_product`
 --
 
 CREATE TABLE `tb_product` (
@@ -269,15 +297,15 @@ CREATE TABLE `tb_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_product`
+-- Dumping data untuk tabel `tb_product`
 --
 
 INSERT INTO `tb_product` (`product_id`, `category_id`, `product_name`, `product_price`, `berat_produk`, `stok_produk`, `product_descrption`, `product_image`, `alamat_pemilik`, `no_telepon`, `product_status`, `date_created`) VALUES
 (2, 8, 'Ubi Jalar', 9000, '1 KG', 66, '<p>Ubi Jalar Dengan Harga Satuan ( Kg )</p>\r\n', 'produk1653530839.jpg', 'Balige', 'https://api.whatsapp.com/send?phone=6282277654318 &text= Hai, saya tertarik dengan produk Anda.', 1, '2022-06-07 08:28:26'),
 (4, 8, 'Kacang Tanah', 18000, '1 KG', 300, '<p>Kacang Tanah Kualitas Bagus Dengan Harga Satuan ( Kg )</p>\r\n', 'produk1653531014.jpg', 'Balige', 'https://api.whatsapp.com/send?phone=6282314031701 &text= Hai, saya tertarik dengan produk Anda.', 1, '2022-06-06 11:23:38'),
-(5, 8, 'Kedelai', 18500, '1 KG', 91, '<p>Kacang Kedelai Berkualitas Dengan Harga Satuan ( Kg )</p>\r\n', 'produk1653531463.jpg', 'Balige', 'https://api.whatsapp.com/send?phone=6281397773731&text= Hai, saya tertarik dengan produk Anda.', 1, '2022-06-11 13:34:53'),
-(6, 8, 'Beras Putih', 17500, '1 Kg', 99, '<p>Beras Putih Berkualitas Dengan Harga Satuan ( Kaleng )</p>\r\n', 'produk1653531644.jpg', 'Balige', 'https://api.whatsapp.com/send?phone=6285355081306 &text= Hai, saya tertarik dengan produk Anda.', 1, '2022-06-11 05:24:30'),
-(7, 8, 'Bawang Merah', 14500, '1 Kg', -1, '<p>Bawang Merah Berkualitas Dengan Harga Satuan ( Kg )</p>\r\n', 'produk1653534364.jpg', '', '', 1, '2022-06-11 03:11:21'),
+(5, 8, 'Kedelai', 18500, '1 KG', 89, '<p>Kacang Kedelai Berkualitas Dengan Harga Satuan ( Kg )</p>\r\n', 'produk1653531463.jpg', 'Balige', 'https://api.whatsapp.com/send?phone=6281397773731&text= Hai, saya tertarik dengan produk Anda.', 1, '2022-06-21 15:16:56'),
+(6, 8, 'Beras Putih', 17500, '1 Kg', 95, '<p>Beras Putih Berkualitas Dengan Harga Satuan ( Kaleng )</p>\r\n', 'produk1653531644.jpg', 'Balige', 'https://api.whatsapp.com/send?phone=6285355081306 &text= Hai, saya tertarik dengan produk Anda.', 1, '2022-06-21 16:32:13'),
+(7, 8, 'Bawang Merah', 14500, '1 Kg', -9, '<p>Bawang Merah Berkualitas Dengan Harga Satuan ( Kg )</p>\r\n', 'produk1653534364.jpg', '', '', 1, '2022-06-21 16:32:13'),
 (14, 8, 'Cabe Merah', 7500, '1 Kg', 7, 'Cabai merah harga satuan per Kg', 'produk1654276014.jpg', '', '', 1, '2022-06-11 04:05:46'),
 (15, 8, 'sadsad', 3213231, '1', 3223, '<p>dsadsa</p>\r\n', 'produk1654925461.png', '', '', 1, '2022-06-11 05:31:01'),
 (16, 8, 'Tomat', 170000, '1 Kg', 500, '<p>ds</p>\r\n', 'produk1654933430.jpg', '', '', 1, '2022-06-11 07:43:50'),
@@ -287,7 +315,7 @@ INSERT INTO `tb_product` (`product_id`, `category_id`, `product_name`, `product_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -302,7 +330,7 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`, `nama_lengkap`, `no_telepon`, `email`, `alamat`) VALUES
@@ -315,150 +343,150 @@ INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`, `nama_lengkap
 --
 
 --
--- Indexes for table `checkout`
+-- Indeks untuk tabel `checkout`
 --
 ALTER TABLE `checkout`
   ADD PRIMARY KEY (`idcheckout`);
 
 --
--- Indexes for table `ongkir`
+-- Indeks untuk tabel `ongkir`
 --
 ALTER TABLE `ongkir`
   ADD PRIMARY KEY (`id_ongkir`);
 
 --
--- Indexes for table `pelanggan`
+-- Indeks untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`);
 
 --
--- Indexes for table `pembayaran`
+-- Indeks untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`);
 
 --
--- Indexes for table `pembelian`
+-- Indeks untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
   ADD PRIMARY KEY (`id_pembelian`);
 
 --
--- Indexes for table `pembelian_produk`
+-- Indeks untuk tabel `pembelian_produk`
 --
 ALTER TABLE `pembelian_produk`
   ADD PRIMARY KEY (`id_pembelian_produk`);
 
 --
--- Indexes for table `tb_admin`
+-- Indeks untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
--- Indexes for table `tb_category`
+-- Indeks untuk tabel `tb_category`
 --
 ALTER TABLE `tb_category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `tb_login`
+-- Indeks untuk tabel `tb_login`
 --
 ALTER TABLE `tb_login`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indexes for table `tb_penjual`
+-- Indeks untuk tabel `tb_penjual`
 --
 ALTER TABLE `tb_penjual`
   ADD PRIMARY KEY (`penjual_id`);
 
 --
--- Indexes for table `tb_product`
+-- Indeks untuk tabel `tb_product`
 --
 ALTER TABLE `tb_product`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `checkout`
+-- AUTO_INCREMENT untuk tabel `checkout`
 --
 ALTER TABLE `checkout`
   MODIFY `idcheckout` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `ongkir`
+-- AUTO_INCREMENT untuk tabel `ongkir`
 --
 ALTER TABLE `ongkir`
   MODIFY `id_ongkir` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `pelanggan`
+-- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
   MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `pembayaran`
+-- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
   MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `pembelian`
+-- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
--- AUTO_INCREMENT for table `pembelian_produk`
+-- AUTO_INCREMENT untuk tabel `pembelian_produk`
 --
 ALTER TABLE `pembelian_produk`
-  MODIFY `id_pembelian_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id_pembelian_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
--- AUTO_INCREMENT for table `tb_admin`
+-- AUTO_INCREMENT untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `tb_category`
+-- AUTO_INCREMENT untuk tabel `tb_category`
 --
 ALTER TABLE `tb_category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `tb_login`
+-- AUTO_INCREMENT untuk tabel `tb_login`
 --
 ALTER TABLE `tb_login`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tb_penjual`
+-- AUTO_INCREMENT untuk tabel `tb_penjual`
 --
 ALTER TABLE `tb_penjual`
   MODIFY `penjual_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tb_product`
+-- AUTO_INCREMENT untuk tabel `tb_product`
 --
 ALTER TABLE `tb_product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `tb_user`
+-- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

@@ -16,7 +16,7 @@ $detailpembelian = $ambil->fetch_assoc();
 //echo "</pre>";
 
 //mendapatkan id_pelanggan yang beli
-$id_pelanggan_beli = $detailpembelian["id_pelanggan"];
+$id_pelanggan_beli = $detailpembelian["admin_id"];
 $id_pelanggan_login = $_SESSION["pelanggan"]["admin_id"];
 if ($id_pelanggan_login !== $id_pelanggan_beli)
 {
@@ -29,7 +29,7 @@ if ($id_pelanggan_login !== $id_pelanggan_beli)
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
-<title> Pembayaran </title>
+<title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<style>

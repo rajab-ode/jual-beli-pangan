@@ -17,7 +17,7 @@ $detail = $ambil->fetch_assoc();
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<title>E-Marketplace</title>
 </head>
 <style>
 	body {

@@ -13,7 +13,7 @@ $login = $_SESSION["login"];
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
-<title> E-COMMERCE </title>
+<title>E-Marketplace</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -39,7 +39,7 @@ $login = $_SESSION["login"];
 </div>
 </div><div class='linklist'>
 <div class="menu-widget">
-<span class="menu-item"><a href="index.php">Home</a></span><span class="menu-item"><a href="produk.php">Produk</a></span><span class="menu-item"><a href="keranjang.php">Keranjang Belanja</a></span>
+<span class="menu-item"><a href="index.php">Home</a></span><span class="menu-item"><a href="produk.php">Produk</a></span><span class="menu-item"><a href="keranjang.php">Keranjang Belanja</a></span><span class="menu-item"><a href="riwayat.php">Riwayat Belanja</a></span>
 </div>
 <?php if(!empty($login)==true): ?>
 </div><div class='logout-button'><span class='logout-btn'><a href='logout1.php'>Logout</a></span></div>
