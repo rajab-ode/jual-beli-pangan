@@ -157,7 +157,7 @@ a.btn.btn-success.batal {
 </thead>
 <tbody>
 	<?php $nomor=1; ?>
-	<?php $ambil=$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id");?>
+	<?php $ambil=$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.id_pelanggan=tb_admin.admin_id");?>
 	<?php while ($pecah = $ambil->fetch_assoc()){ ?>
 	<tr>
 		<td> <?php echo $nomor; ?></td>

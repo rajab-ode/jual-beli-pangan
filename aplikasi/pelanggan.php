@@ -7,7 +7,36 @@ if ($_SESSION['login'] != true){
 }
 $query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='admin'");
 $d = mysqli_fetch_object($query);
+
+$pelanggan=mysqli_query($conn,"SELECT * FROM tb_admin WHERE level='pembeli' ");
+
+if(!empty($_GET["id"])){
+while($pecah = $pelanggan->fetch_assoc()){
+		if($_GET["id"] == $pecah["admin_id"]){
+			$id = $_GET["id"];
+			$pelanggan=mysqli_query($conn,"DELETE FROM tb_admin WHERE admin_id='$id' ");
+			if($pelanggan==false) {
+				echo"
+					<script>
+						alert('Akun Gagal Dihapus');
+						window.location.href = 'pelanggan.php?halaman=pelanggan';
+					</script>
+				";
+			}
+			echo"
+				<script>
+					alert('Akun Berhasil Dihapus');
+					window.location.href = 'pelanggan.php?halaman=pelanggan';
+				</script>
+			";
+			
+		} 
+	}
+}
+
+
 ?>
+
 <!doctype html>
 <html>
 	<head>
@@ -155,7 +184,7 @@ table.table.table-bordered tr td {
 		<td> <?php echo $pecah['admin_email']; ?></td>
 		<td> <?php echo $pecah ['admin_telp']; ?></td>
 		<td>
-			<a href="" class="btn btn-danger"><i class='bx bx-trash'></i></a>
+			<a href="pelanggan.php?id=<?= $pecah['admin_id'] ?>" class="btn btn-danger"><i class='bx bx-trash'></i></a>
 		</td>
 	</tr>
 	<?php $nomor++; ?>

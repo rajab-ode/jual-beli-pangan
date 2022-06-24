@@ -147,7 +147,7 @@ a.btn.btn-secondary {
 			<?php
 			$nomor=1;
 			$admin_id = $_SESSION["pelanggan"]["admin_id"];
-			$ambil = $koneksi->query("SELECT * FROM pembelian WHERE admin_id='$admin_id'");
+			$ambil = $koneksi->query("SELECT * FROM pembelian WHERE id_pelanggan ='$admin_id'");
 			while ($pecah=$ambil->fetch_assoc()){
 				?>
 			<tr>

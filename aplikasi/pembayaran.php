@@ -16,7 +16,7 @@ $detailpembelian = $ambil->fetch_assoc();
 //echo "</pre>";
 
 //mendapatkan id_pelanggan yang beli
-$id_pelanggan_beli = $detailpembelian["admin_id"];
+$id_pelanggan_beli = $detailpembelian["id_pelanggan"];
 $id_pelanggan_login = $_SESSION["pelanggan"]["admin_id"];
 if ($id_pelanggan_login !== $id_pelanggan_beli)
 {

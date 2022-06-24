@@ -141,16 +141,22 @@ a.btn.btn-success:hover{
 		<div class="container">
 			<h2> Detail Pembelian </h2>
 			<?php
-			$ambil = $koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id WHERE pembelian.id_pembelian='$_GET[id]'");
+			$ambil = $koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.id_penjual=tb_admin.admin_id WHERE pembelian.id_pembelian='$_GET[id]'");
 			// var_dump($ambil); 
 			$detail =$ambil->fetch_assoc();
+			$no_telp = $detail["admin_telp"];
+			// var_dump($no_telp);
+			// $telp = $koneksi->query("SELECT * FROM tb_admin WHERE admin_id = $no_telp ");
+			// var_dump($telp);
+			// $telpon_penjual = $telp->fetch_assoc();
+			// var_dump($telpon_penjual); die;
 			?>
 			<!--<pre> <?php //print_r($detail);?></pre>-->
 		
 			<?php
-			$idpelangganyangbeli = $detail["admin_id"];
+			$idpelangganyangbeli = $detail["id_pelanggan"];
 			$idpelangganyanglogin = $_SESSION["pelanggan"]["admin_id"];
-			if ($idpelangganyangbeli!==$idpelangganyanglogin)
+			if ($idpelangganyangbeli !==$idpelangganyanglogin)
 			{
 				echo "<script>alert('jangan nakal');</script>";
 				echo "<script>location='riwayat.php';</script>";
@@ -222,8 +228,11 @@ a.btn.btn-success:hover{
 						</div>
 					</div>
 					<div style="position:absolute; right:250px; top:1150px;">
+					<?php 
+						
+					?>
 						<i class='bx bxl-whatsapp' style='color:white; font-size:50px; position:absolute; top:-13px; left:15px;'></i>
-						<a class="btn btn-success" style="padding: 20px 25px 20px 70px; color:white; border-radius:25px; font-weight:bold" href="https://api.whatsapp.com/send?phone=6285220832295" target="_blank">Chat Penjual</a>
+						<a class="btn btn-success" style="padding: 20px 25px 20px 70px; color:white; border-radius:25px; font-weight:bold" href="https://api.whatsapp.com/send?phone=<?= $no_telp; ?>" target="_blank">Chat Penjual</a>
 					</div>
 					<div class="row">
 						<div class="col-md-7">

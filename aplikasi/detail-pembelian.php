@@ -121,7 +121,7 @@ input.form-control:focus, select.form-control:focus {
 	{
 		$resi = $_POST["resi"];
 		$status = $_POST["status"];
-		$koneksi->query("UPDATE pembelian SET resi_pengiriman='$ressi',status_pembelian='$status' WHERE id_pembelian='$idpembelian'");
+		$koneksi->query("UPDATE pembelian SET resi_pengiriman='$resi',status_pembelian='$status' WHERE id_pembelian='$idpembelian'");
 		echo "<script>alert('data berhasil diupdate');</script>";
 		echo "<script>location='pembelian1.php';</script>";
 	}

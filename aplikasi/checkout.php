@@ -3,6 +3,7 @@ session_start();
 
 include('db.php');
 
+$id = $_SESSION["id"];
 
 $koneksi =new mysqli("localhost","root","","db_hasilpertanian");
 $alamat_pengiriman = $alamat_pengiriman_er = "";
@@ -246,6 +247,12 @@ outline-color:#2962ff;
 						<?php } ?>
 					</select>
 				</div>
+				<?php 
+					$ambil = $koneksi->query("SELECT * FROM tb_product WHERE product_id ='$product_id'");
+					$hasil = $ambil->fetch_assoc();
+				?>
+				<input type="text" value="<?= $hasil["penjual_id"] ?>" name="penjual_id" hidden>
+				<input type="text" value="<?= $id ?>" name="id_pelanggan" hidden>
 			</div>
 			<div class="form-group">
 				<label><b>Alamat Lengkap Pengiriman</b></label>
@@ -257,7 +264,9 @@ outline-color:#2962ff;
 		<?php
 		if (isset($_POST["checkout"]))
 		{
-			$admin_id = $_SESSION["pelanggan"]["admin_id"];
+			$penjual_id = $_POST["penjual_id"];
+			$id_pelanggan = $_POST["id_pelanggan"];
+			// $admin_id = $_SESSION["pelanggan"]["admin_id"];
 			$id_ongkir = $_POST["id_ongkir"];
 			$tanggal_pembelian = date("Y-m-d");
 			$alamat_pengiriman = $_POST['alamat_pengiriman'];
@@ -267,7 +276,7 @@ outline-color:#2962ff;
 			$tarif = $arrayongkir['tarif']*$hasil1;
 			$total_pembelian = $totalbelanja + $tarif;
 			// echo"<br>";
-			// var_dump($id_pelanggan);
+			// var_dump($penjual_id);
 			// echo"<br>";
 			// var_dump($id_ongkir);
 			// echo"<br>";
@@ -285,11 +294,14 @@ outline-color:#2962ff;
 			// echo"<br>";
 			// var_dump($total_pembelian);
 			// echo"<br>";
+			// var_dump($id_pelanggan);
 			// die;
 			
 			// 1. Menyimpan data ke tabel pembelian
 		
-			$koneksi->query("INSERT INTO pembelian (admin_id,id_ongkir,tanggal_pembelian,total_pembelian,nama_kota,tarif,alamat_pengiriman) VALUES ('$admin_id','$id_ongkir','$tanggal_pembelian', '$total_pembelian','$nama_kota','$tarif','$alamat_pengiriman') " );
+			$koneksi->query("INSERT INTO pembelian (id_pelanggan,id_ongkir, id_penjual, tanggal_pembelian,total_pembelian,nama_kota,tarif,alamat_pengiriman) VALUES ('$id_pelanggan','$id_ongkir','$penjual_id','$tanggal_pembelian', '$total_pembelian','$nama_kota','$tarif','$alamat_pengiriman') " );
+
+			// var_dump($koneksi); die;
 			
 			//mendapatkan id_pembelian barusan
 			$id_pembelian_barusan = $koneksi->insert_id;
@@ -310,7 +322,7 @@ outline-color:#2962ff;
 			unset ($_SESSION["keranjang"]);
 			
 			//tampilan dialihkan ke nota 
-           if($koneksi){
+           if($koneksi == true){
 			echo "<script>alert('pembelian suksess') ;</script>";
 				echo "<script>location='nota.php?id=$id_pembelian_barusan';</script>";
             }else{

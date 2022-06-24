@@ -23,7 +23,7 @@ if (isset($_POST["kirim"]))
 	}
 }
 
-$ambil1 = $koneksi->query("SELECT * FROM pembelian LEFT JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id");
+$ambil1 = $koneksi->query("SELECT * FROM pembelian LEFT JOIN tb_admin ON pembelian.id_penjual=tb_admin.admin_id");
 
 // foreach($ambil as $row){
 // 	var_dump($row); 
@@ -197,6 +197,7 @@ table.table.table-bordered tr td {
 										<th>Jumlah</th>
 									</tr>
 								</thead>
+								<?php if(!isset($_POST["kirim"])): ?>
 								<tbody>
 									<?php $total=0;?>
 									<?php $no = 1;?>
@@ -218,6 +219,29 @@ table.table.table-bordered tr td {
 									</tr>
 									</tfoot>
 								</tr>
+								<?php elseif(isset($_POST["kirim"])): ?>
+								<tbody>
+									<?php $total=0;?>
+									<?php $no = 1;?>
+									<?php foreach ($semuadata as $key):?>
+									<?php $total+=$key['total_pembelian']?>
+									<tr>
+										<td><?php echo $no++; ?></td>
+										<td><?php echo $key["admin_name"]?></td>
+										<td><?php echo $key["tanggal_pembelian"]?></td>
+										<td><?php echo $key["status_pembelian"]?></td>
+										<td>Rp.<?php echo number_format($key["total_pembelian"])?> </td>
+									</tr>
+									<?php endforeach ?>
+								</tbody>
+								<tfoot>
+									<tr>
+									<th colspan="4">Total</th>
+									<th><center>Rp.<?php echo number_format($total)?></center></th>
+									</tr>
+									</tfoot>
+								</tr>
+								<?php endif; ?>
 						
 						</form>
 					</div>

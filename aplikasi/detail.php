@@ -4,7 +4,8 @@ $koneksi = new mysqli ("localhost","root","","db_hasilpertanian");
 ?>
 <?php
 			$idpembelian = $_GET["id"];
-			$ambil =$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.admin_id=tb_admin.admin_id WHERE pembelian.id_pembelian='$idpembelian'");
+			// var_dump($idpembelian); die;
+			$ambil =$koneksi->query("SELECT * FROM pembelian JOIN tb_admin ON pembelian.id_penjual=tb_admin.admin_id WHERE pembelian.id_pembelian='$idpembelian'");
 			$detail =$ambil->fetch_assoc();
 			?>
 <!--</pre><?php //print_r($detail);?></pre>-->
@@ -113,7 +114,7 @@ table.table.table-bordered tr td {
 	</thead>
 	<tbody>
 		<?php $nomor=1;?>
-		<?php $ambil=$koneksi->query("SELECT * FROM pembelian_produk JOIN tb_product ON pembelian_produk.product_id=tb_product.product_id WHERE pembelian_produk.id_pembelian");?>
+		<?php $ambil=$koneksi->query("SELECT * FROM pembelian_produk JOIN tb_product ON pembelian_produk.product_id=tb_product.product_id WHERE pembelian_produk.id_pembelian = $idpembelian");?>
 		<?php while ($pecah=$ambil->fetch_assoc()){ ?>
 		<tr>
 			<td><?php echo $nomor;?></td>
