@@ -12,6 +12,17 @@ $koneksi = new mysqli ("localhost","root","","db_hasilpertanian");
 <!doctype html>
 <html>
 <head>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" type="text/css" href="icon/css/all.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src='javascript/jquery.min.js'></script>
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
 	<style>
 body{
     display: flex;
@@ -74,34 +85,95 @@ table.table.table-bordered tr td {
 	padding:6px 12px;
 	border-radius:4px;
 }
+.st{
+	position: absolute !important;
+	bottom: 9px !important;
+	left: 130px !important;
+}
+
+.print2{
+		display: none;
+	}
+	.first-header{
+		display: none;
+	}
+
+@media print {
+	body{
+		background: white;
+		height: 100%;
+	}
+	.container-form{
+		box-shadow: none;
+		width: 100%;
+	}
+	.print{
+		display: none;
+	}
+	.print2{
+		display: block;
+	}
+	.pt2{
+		margin-bottom: 30px;
+		margin-left: 50px;
+	}
+	.row{
+		width: 99%;
+	}
+	.col-md-4{
+		width: 33%;
+	}
+	.first-header{
+		display: block !important;
+	}
+
+}
+
 		</style>
 </head>
 <body>
-<div class='container-form'>
-<h2> Detail Pembelian</h2>
+<div class='container-form' style="position: relative;">
+<h2 class="print"> Detail Pembelian</h2>
+<!-- <h2 class="print2 pt2"> Laporan</h2> -->
+<div class='first-header' style="display: none;">
+	<div class='header-logo-univ w-100'>
+		<center>
+		<img src='logo-toba.png' width="75">
+		</center>
+	</div>
+	<div class="goverment-toba">
+		<h5>Pemerintah Kabupaten Toba</h5>
+		<h5>Dinas Pertanian & Perikanan Tobasa</h5>
+		<h6>Jl. Pertanian No.1, Huta Bulu Mejan, Kec. Balige, Toba, Sumatera Utara 22312</h6>
+	</div>
+
+</div>
+<hr>
+<center>
 <div class="row">
-<div class="col-md-4">
-					<h3>Pembelian</h3>
-					<strong>No.Pembelian : <span style='color:#bf5000;'>#<?php echo $detail['id_pembelian'];?></span></strong><br>
-					Tanggal : <?php echo $detail['tanggal_pembelian'];?><br>
-					Total : Rp. <?php echo number_format($detail['total_pembelian'])?>
-				
-				</div>
-				<div class="col-md-4">
-					<h3>Pelanggan</h3>
-					<strong><?php echo $detail['admin_name'];?></strong><br>
-			
-						<?php echo $detail['admin_telp'];?><br>
-						<?php echo $detail['admin_email'];?>
-					
-				</div>
-				<div class="col-md-4">
-					<h3>Pengiriman</h3>
-					<strong><?php echo $detail['nama_kota'];?></strong><br>
-					Ongkos Kirim: Rp.<?php echo number_format($detail['tarif']);?><br>
-					Alamat : <?php echo $detail['alamat_pengiriman']?>
-				</div>
-			</div>
+	<div class="col-md-4" >
+		<h3>Pembelian</h3>
+		<strong>No.Pembelian : <span style='color:#bf5000;'>#<?php echo $detail['id_pembelian'];?></span></strong><br>
+		Tanggal : <?php echo $detail['tanggal_pembelian'];?><br>
+		Total : Rp. <?php echo number_format($detail['total_pembelian'])?>
+	
+	</div>
+	<div class="col-md-4">
+		<h3>Pelanggan</h3>
+		<strong><?php echo $detail['admin_name'];?></strong><br>
+
+			<?php echo $detail['admin_telp'];?><br>
+			<?php echo $detail['admin_email'];?>
+		
+	</div>
+	<div class="col-md-4">
+		<h3>Pengiriman</h3>
+		<strong><?php echo $detail['nama_kota'];?></strong><br>
+		Ongkos Kirim: Rp.<?php echo number_format($detail['tarif']);?><br>
+		Alamat : <?php echo $detail['alamat_pengiriman']?>
+	</div>
+</div>
+</center>
 <table class="table table-bordered">
 	<thead>
 		<tr>
@@ -127,7 +199,10 @@ table.table.table-bordered tr td {
 		<?php } ?>
 	</tbody>
 </table>
-<div class='back-to-home'><a href='pembelian1.php'>Back</a></div>
+<div class='back-to-home print'><a href='pembelian1.php'>Back</a></div>
+<div class="print st">
+	<button class="btn btn-primary" style="padding: 6px 15px;" onclick="window.print()">print</button>
+</div>
 		</div>
 		
 		</body>

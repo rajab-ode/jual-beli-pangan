@@ -95,7 +95,13 @@ table.table.table-bordered tr td {
 		<div class='logo-content'>
 		<div class='logo'>
 			<i class='bx bx-menu' id='btn'></i>
-		<div class='logo_name'><p style='font-size:small'>Halo...<br/>Selamat datang... <span style='font-style:italic;color:#2962ff'><?php echo $d->level ?></span></p></div>
+			<div class='logo_name ' >
+				<i class="fa-solid fa-user"  style="margin-left: -10px;"></i>
+				<div style="position:absolute; top:10px; left:100px;"> 
+					<p style='font-size:small' >Selamat datang <br>
+					<span style='font-style:italic;color:#2962ff'><?php echo $d->username ?></span></p></div>
+				</div>
+			</div>
 			
 		</div>
 

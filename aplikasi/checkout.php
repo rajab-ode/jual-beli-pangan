@@ -169,6 +169,7 @@ outline-color:#2962ff;
 	<div class="container">
 		<h1> Keranjang Belanja</h1>
 		<table class="table table-bordered">
+			
 		<thead>
 			<tr>
 				<th>No</th>
@@ -181,11 +182,13 @@ outline-color:#2962ff;
 		<tbody>
 			<?php $nomor=1;?>
 			<?php $totalbelanja =0; ?>
-			<?php  
+			<?php
 			$keranjang=array();
 			foreach ($_SESSION["keranjang"] as $product_id => $jumlah): ?>
 			
 			<?php
+			$ambil = $koneksi->query("SELECT * FROM tb_product WHERE product_id ='$product_id'");
+			$pecah = $ambil->fetch_assoc();
 			$ambil = $koneksi->query("SELECT * FROM tb_product WHERE product_id ='$product_id'");
 			$pecah = $ambil->fetch_assoc();
 			$subharga =$pecah["product_price"]*$jumlah;

@@ -7,6 +7,11 @@ if ($_SESSION['login'] != true){
 $id = $_SESSION["id"];
 $query = mysqli_query($conn, "SELECT * FROM tb_admin WHERE level='penjual' AND admin_id = $id");
 $d = mysqli_fetch_object($query);
+$telp = $d->admin_telp;
+// $telp = $d['admin_telp'];
+// var_dump($query->fetch_assoc());
+// $test = $query->fetch_assoc();
+// var_dump($query->admin_telp);
 ?>
 <!doctype html>
 <html>
@@ -125,6 +130,7 @@ $d = mysqli_fetch_object($query);
 						$type1 = explode('.', $filename);
 						$type2 = $type1[1];
 						$newname = 'produk'.time().'.'.$type2;
+						$no_telepon = "https://api.whatsapp.com/send?phone=".$telp." &text= Hai, saya tertarik dengan produk Anda.";
 						// var_dump($kategori);
 						// echo"<br>";
 						// var_dump($nama);

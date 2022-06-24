@@ -84,7 +84,68 @@ table.table.table-bordered tr td {
 	padding:4px 8px;
 	outline-color:#2962ff;
 }
+
+.h22{
+	display: none;
+}
+
+
+@media print {
+	.sidebar{
+		display: none;
+	}
+	.container{
+		/* background: #000 !important; */
+		width: 100%;
+		/* margin: -10px 0 0 -300px; */
+		padding: 0;
+	}
+	.box,.box2{
+		width: 100%;
+		/* background: #000; */
+		border: none;
+	}
+	.main-content{
+		width: 100%; 
+		margin: -10px 0 0 -300px;
+
+		background:white;
+	}
+	.first-header{
+		display: block !important;
+	}
+
+	/* .print{
+		display: block;
+	} */
+	.footer-sidebar, .alert_info, .h3, .row, .col-md-5, .col-md-2{
+		display: none;
+	}
+	
+}
+
+
 	</style>
+	<?php if(isset($_POST["kirim"])): ?>
+		<style>
+			@media print {
+				.h22{
+					display: none;
+				}
+			}
+		</style>
+	<?php elseif(!isset($_POST["kirim"])): ?>
+		<style>
+			@media print {
+				.h21{
+					display: none;
+				}
+				.h22{
+					display: block;
+				}
+			}
+		</style>
+	<?php endif; ?>
 </head>
 <body >
 <!--	HEADER -->
@@ -94,7 +155,13 @@ table.table.table-bordered tr td {
 		<div class='logo-content'>
 		<div class='logo'>
 			<i class='bx bx-menu' id='btn'></i>
-		<div class='logo_name'><p style='font-size:small'>Halo...<br/>Selamat datang... <span style='font-style:italic;color:#2962ff'><?php echo $d->level ?></span></p></div>
+			<div class='logo_name ' >
+				<i class="fa-solid fa-user"  style="margin-left: -10px;"></i>
+				<div style="position:absolute; top:10px; left:100px;"> 
+					<p style='font-size:small' >Selamat datang <br>
+					<span style='font-style:italic;color:#2962ff'><?php echo $d->username ?></span></p></div>
+				</div>
+			</div>
 			
 		</div>
 
@@ -156,17 +223,32 @@ table.table.table-bordered tr td {
 <!--	END		-->
 
 	</div>
-	
 	<div class="main-content" style="">
 		<div class='dashboard-profil'>
 			<div class="section-admin">
 				<div class="container">
 					<p class="alert_info dashboard_alert">Berikut Data <a href="#form-profil-admin">Laporan</a> anda dibawah !</p>
-					<h3>Dashboard Laporan</h3>
+					<h3 class="h3">Dashboard Laporan</h3>
 					<div class="box box2" style=" margin-bottom: 100px;">
-						<h2> Laporan Pembelian dari <?php echo $tgl_mulai ?> hingga <?php echo $tgl_selesai ?></h2>
+						<div class='first-header' style="display: none;">
+							<div class='header-logo-univ w-100'>
+								<center>
+								<img src='logo-toba.png' width="75">
+								</center>
+							</div>
+							<div class="goverment-toba">
+								<h5>Pemerintah Kabupaten Toba</h5>
+								<h5>Dinas Pertanian & Perikanan Tobasa</h5>
+								<h6>Jl. Pertanian No.1, Huta Bulu Mejan, Kec. Balige, Toba, Sumatera Utara 22312</h6>
+							</div>
+						
+						</div>
+						<hr>
+						<h2 class="h21"> Laporan Pembelian dari <?php echo $tgl_mulai ?> hingga <?php echo $tgl_selesai ?></h2>
+						
+						<h2 class="h22"> Semua Laporan Pembelian</h2>
 						<br>	
-
+						
 						<tr>
 						<form method="post">
 							<div class="row" style='display:flex'>
@@ -177,14 +259,16 @@ table.table.table-bordered tr td {
 								</div>
 								</div>
 								<div class="col-md-5">
-								<div class="form-group">
+									<div class="form-group">
 									<label>Tanggal Selesai</label>
 									<input type="date" class="form-control" name="tgls" value="<?php echo $tgl_selesai ?>">
 								</div>
 								</div>
 								<div class="col-md-2">
 									<label>&nbsp;</label>
-									<button class="btn btn-primary" name="kirim" style='margin:0 0 10px;'>Lihat</button>
+									
+									<button class="btn btn-primary" name="kirim" style='margin: 20px 0 20px;'>Lihat</button> 
+									<button style="margin-left:15px;" class="btn btn-primary" onclick="window.print()">print</button>
 								</div>
 							</div>
 							<table class="table table-bordered">
@@ -218,7 +302,6 @@ table.table.table-bordered tr td {
 									<th><center>Rp.<?php echo number_format($total)?></center></th>
 									</tr>
 									</tfoot>
-								</tr>
 								<?php elseif(isset($_POST["kirim"])): ?>
 								<tbody>
 									<?php $total=0;?>
@@ -236,32 +319,31 @@ table.table.table-bordered tr td {
 								</tbody>
 								<tfoot>
 									<tr>
-									<th colspan="4">Total</th>
-									<th><center>Rp.<?php echo number_format($total)?></center></th>
+										<th colspan="4">Total</th>
+										<th><center>Rp.<?php echo number_format($total)?></center></th>
 									</tr>
-									</tfoot>
-								</tr>
+								</tfoot>
 								<?php endif; ?>
 						
-						</form>
+							</form>
 					</div>
-				
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class='footer-sidebar' style="position: absolute; bottom:-100px;">
-		<div class='footer-image'>
-			<img src='logo-toba.png'/>
-			<div class="footer-desc">
-				<span class='goverment'>Pemerintah Kabupaten Toba</span>
-				<span class='dinas-gov'>Dinas Pertanian &amp; Perikanan Tobasa </span>
-				<p>Jl. Pertanian No.1, Huta Bulu Mejan, Kec. Balige, Toba, Sumatera Utara 22312</p>
+	<div class='footer-sidebar' style="position: fixed;">
+			<div class='footer-image'>
+				<img src='logo-toba.png'/>
+				<div class="footer-desc">
+					<span class='goverment'>Pemerintah Kabupaten Toba</span>
+						<span class='dinas-gov'>Dinas Pertanian &amp; Perikanan Tobasa </span>
+						<p>Jl. Pertanian No.1, Huta Bulu Mejan, Kec. Balige, Toba, Sumatera Utara 22312</p>
 					
+				</div>
 			</div>
+				
 		</div>
-	
-	</div>
 <script>
 	let btn = document.querySelector('#btn');
 	let sidebar = document.querySelector('.sidebar');

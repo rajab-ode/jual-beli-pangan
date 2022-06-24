@@ -89,7 +89,7 @@ $login = $_SESSION["login"];
 						<p class="harga" style='margin:5px 0 10px;font-style:italic'><i class='bx bx-purchase-tag-alt' style='color:#bf5000;'></i> Rp. <?php echo number_format($p['product_price'])?></p>
 						<p style='margin:10px 0 0;text-align:center;'><a href="beli.php?id=<?php echo $p['product_id'];?> " class="btn btn-blue"><i class='bx bx-basket' ></i>Beli</a>
 						<a href="detail-produk.php?id=<?php echo $p["product_id"];?>" class="btn btn-black"><i class='bx bx-detail'></i> Detail</a></p>
-						<p style='margin:10px 0 0;text-align:center;'><a class="btn btn-green" href="<?php echo $p['no_telepon']?>"><i class='bx bxs-phone'></i> Hubungi Penjual</a></p>
+						<p style='margin:10px 0 0;text-align:center;'><a class="btn btn-green" href="<?php echo $p['no_telepon']?>" target="_blank"><i class='bx bxs-phone'></i> Hubungi Penjual</a></p>
 							</div>
 					</div>
 					</a>
