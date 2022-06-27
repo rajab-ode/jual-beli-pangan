@@ -27,6 +27,9 @@ $d = mysqli_fetch_object($query);
 <script src='javascript/jquery.min.js'></script>
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <style>
+	h2,h3{
+		font-family: Timed New Roman;
+	}
 	div.main-content {
 		display:flex;
 		justify-content:center;

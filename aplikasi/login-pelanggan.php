@@ -29,12 +29,16 @@ include('db.php');
  font-size: 28px;
  font-weight: bold;
  color: white;
- padding: 25px 0 30px 25px;
+ padding: 10px 0 10px 25px;
  background: #2962ff;
  border-bottom: 1px solid #2962ff;
  border-radius: 5px 5px 0 0;
  text-align:center;
+ 
 }
+/* .header{
+	font-family: 'Times New Roman';
+} */
 .center form{
  position: absolute;
  background: white;
@@ -122,20 +126,25 @@ div.mini-button {
 </style>
 </head>
 <body>
-<div class="center">
-         <div class="header">
-            Login Pelanggan
-         </div>
-         <form method='post'>
-		 <div class='user-icon'><i class='bx bx-user' style='position:inherit;font-size:70px;'></i></div>
-            <input type="text" placeholder="Masukan Username" name='user'>
-            <i class='bx bx-envelope'></i>
-            <input id="pswrd" type="password" placeholder="Password" name='password'>
-            <i class='bx bx-show'onclick="show()"></i>
-            <button class='btn-login-primary' type="submit" name='login'>Login</button>
-			<div class='mini-button'><a class='mini' href='daftar1.php'>Daftar / <a class='mini' href='index.php'>Beranda</a></div>
-         </form>
-      </div>
+	<div class="center">
+
+
+		<div class="header" style=""><span style="margin-right: 30px; font-family:Times New Roman;">LOGIN</span></div>
+
+		<form method='post'>
+			<div class='user-icon' style="margin-top: 20px; margin-right:20px;">
+				<img src="toba.png" alt="" width="310px">
+			</div>
+			<input type="text" placeholder="Masukan Username" name='user'>
+			<i class='bx bx-envelope'></i>
+			<input id="pswrd" type="password" placeholder="Password" name='password'>
+			<i class='bx bx-show'onclick="show()"></i>
+			<button class='btn-login-primary' type="submit" name='login'>Login</button>
+			<div class='mini-button'>
+				<a class='mini' href='daftar1.php'>Daftar / <a class='mini' href='index.php'>Beranda</a>
+			</div>
+		</form>
+		</div>
       <script>
          function show(){
           var pswrd = document.getElementById('pswrd');
@@ -183,7 +192,7 @@ div.mini-button {
 				$_SESSION["id"] = $akun["admin_id"];
 				$_SESSION["level"] = $akun["level"];
 				
-				header ('location:home-penjual.php');
+				header ('location:dashboard-penjual.php');
 				exit;
 			}
 			if($akun["level"] == "pembeli"){

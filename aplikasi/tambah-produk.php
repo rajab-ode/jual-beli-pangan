@@ -45,9 +45,13 @@ $telp = $d->admin_telp;
 		</div>
 
 		<ul class='nav'>
+			<li><a href="dashboard-penjual.php"><i class='fas fa-tachometer-alt-slow'></i></i><span class='link_name'>Dashboard</span></a>
+						<span class='tooltip'>Dashboard</span>
+						</li>
 		<li><a href="home-penjual.php"><i class='bx bx-user-circle'></i></i><span class='link_name'>Profil</span></a>
 			<span class='tooltip'>Profil</span>
 			</li>
+
 			
 			<li><a href="data-produk1.php?halaman=produk"><i class='bx bxl-product-hunt' ></i><span class='link_name'>Data Produk</span></a>
 			<span class='tooltip'>Data Produk</span>

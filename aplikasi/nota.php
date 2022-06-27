@@ -215,7 +215,7 @@ a.btn.btn-success:hover{
 						<?php } ?>
 					</tbody>
 					</table>
-					<div class="row" style="">
+					<div class="row" style="position:relative;">
 						<div class="col-md-7">
 						<div class="alert alert-info">
 							<p>Silahkan melakukan pembayaran <b>Rp. <?php echo $detail['total_pembelian'];?></b></a></p>
@@ -227,13 +227,15 @@ a.btn.btn-success:hover{
 						</div>
 						</div>
 					</div>
-					<div style="position:absolute; right:250px; top:1150px;">
-					<?php 
-						
-					?>
-						<i class='bx bxl-whatsapp' style='color:white; font-size:50px; position:absolute; top:-13px; left:15px;'></i>
-						<a class="btn btn-success" style="padding: 20px 25px 20px 70px; color:white; border-radius:25px; font-weight:bold" href="https://api.whatsapp.com/send?phone=<?= $no_telp; ?>" target="_blank">Chat Penjual</a>
+					<center>
+					<div style="position:relative; margin-left: 900px;">
+						<div style="position:relative; width:fit-content">
+							<i class='bx bxl-whatsapp' style='color:white; font-size:50px; position:absolute; top:-13px; left:15px;'></i>
+							<a class="btn btn-success" style="padding: 20px 25px 20px 70px; color:white; border-radius:25px; font-weight:bold" href="https://api.whatsapp.com/send?phone=<?= $no_telp; ?>" target="_blank">Chat Penjual</a>
+							
+							</div>
 					</div>
+					</center>
 					<div class="row">
 						<div class="col-md-7">
 						<div class="alert alert-info">
